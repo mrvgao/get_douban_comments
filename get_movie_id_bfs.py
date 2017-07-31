@@ -1,6 +1,5 @@
 import re
 from document_parser import get_soup
-from document_parser import get_html_doc
 import requests
 import time
 import random
