@@ -1,3 +1,5 @@
 .idea/
 __pycache__/document_parser.cpython-36.pyc
 .idea/CommentSpider.iml .idea/dictionaries .idea/misc.xml .idea/modules.xml .idea/preferred-vcs.xml .idea/workspace.xml
+__pycache__/document_parser.cpython-34.pyc __pycache__/fifo_q.cpython-34.pyc
+__pycache__/*
