@@ -1,3 +1,4 @@
+#!/home/minquan/.conda/envs/ai-lab/bin/python
 import re
 from document_parser import get_soup
 import requests
