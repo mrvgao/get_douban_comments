@@ -21,6 +21,7 @@ def get_page_comments(movie_id):
         if r.status_code == 200:
             yield r.text
         else:
+            print(r.status_code)
             print(url)
             raise StopIteration
 
@@ -45,7 +46,7 @@ def main(movie_info_dir, test_mode=False):
         for c in get_movie_comments(id):
             _id += 1
             save([_id] + list(c))
-            if _id % 100 == 0: print("{}: {}".format(_id, c))
+            if _id % 10 == 0: print("{}: {}".format(_id, c))
         visited.add(id)
 
 if __name__ == '__main__':

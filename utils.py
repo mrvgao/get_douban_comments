@@ -21,9 +21,10 @@ def random_sleep():
 
 
 def csv_saver(file, columns):
+    need_column = not os.path.isfile(file)
     csvfile = open(file, 'a+', newline='')
     spamwrite = csv.writer(csvfile)
-    spamwrite.writerow(columns)
+    if need_column: spamwrite.writerow(columns)
 
     def _save(row):
         spamwrite.writerow(list(row))
