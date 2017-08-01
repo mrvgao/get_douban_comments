@@ -16,7 +16,7 @@ def get_douban_id(douban_id_info_directory):
 
 
 def random_sleep():
-    random_sleep_time = random.randint(50, 100) / 100
+    random_sleep_time = random.randint(80, 200) / 100
     time.sleep(random_sleep_time)
 
 
