@@ -46,9 +46,11 @@ def main(movie_info_dir, test_mode=False):
         for c in get_movie_comments(id):
             _id += 1
             save([_id] + list(c))
-            if _id % 10 == 0: print("{}: {}".format(_id, c))
+            if _id % 10 == 0: print("{}-{}: {}".format(ii, _id, c))
         visited.add(id)
 
 if __name__ == '__main__':
-    main('movie_info', test_mode=True)
+    # main('movie_info', test_mode=True)
+    for ii, id in enumerate(get_douban_id('movie_info')):
+        print(ii)
 
