@@ -19,7 +19,6 @@ def get_subject_page_by_movie_id(movie_id):
 def get_recommendation(movie_id):
     url = get_subject_page_by_movie_id(movie_id)
     r = requests.get(url).text
-    print(r)
     recommends = get_recommends_list(get_soup(r))
 
     return recommends
