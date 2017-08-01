@@ -122,6 +122,6 @@ if __name__ == '__main__':
     # print(movie_info)
     # print(recommends)
 
-    ids = ['26388555', '1291992', '1297418', '1291545', '10571509', '1252']
+    ids = ['1441763']
 
     movies = get_recommendation_by_bfs(ids)
