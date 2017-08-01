@@ -50,7 +50,5 @@ def main(movie_info_dir, test_mode=False):
         visited.add(id)
 
 if __name__ == '__main__':
-    # main('movie_info', test_mode=True)
-    for ii, id in enumerate(get_douban_id('movie_info')):
-        print(ii)
+    main('movie_info', test_mode=False)
 
