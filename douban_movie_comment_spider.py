@@ -3,8 +3,6 @@ from document_parser import get_douban_comment_from_html
 from utils import random_sleep
 from utils import get_douban_id
 from utils import csv_saver
-import traceback
-import sys
 
 visited = set()
 
@@ -32,7 +30,6 @@ def get_movie_comments(movie_id):
             comments = get_douban_comment_from_html(comment_page)
             for c in comments: yield c
         except Exception as e:
-            # traceback.print_exc(file=sys.stdout)
             print(e)
             continue
 
@@ -40,15 +37,14 @@ def get_movie_comments(movie_id):
 def main(movie_info_dir, test_mode=False):
     save = csv_saver('movie_comments.csv', ['id', 'link', 'name', 'comment', 'star'])
     _id = 0
-    for ii, id in enumerate(get_douban_id(movie_info_dir)):
+    for ii, movie_id in enumerate(get_douban_id(movie_info_dir)):
         if test_mode and ii > 2: break
-        if id in visited: continue
-        for c in get_movie_comments(id):
+        if movie_id in visited: continue
+        for c in get_movie_comments(movie_id):
             _id += 1
             save([_id] + list(c))
             if _id % 10 == 0: print("{}-{}: {}".format(ii, _id, c))
-        visited.add(id)
+        visited.add(movie_id)
 
 if __name__ == '__main__':
     main('movie_info', test_mode=False)
-

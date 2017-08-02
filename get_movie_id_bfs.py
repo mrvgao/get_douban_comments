@@ -80,7 +80,7 @@ def get_recommendation_by_bfs(movie_id):
 
     number = 0
 
-    save_info = movie_info_saver('movie_info_from_{}.csv'.format(movie_id[0]))
+    save_info = movie_info_saver('movie_info/movie_info_from_{}.csv'.format(movie_id[0]))
 
     while 0 < len(queue) < max_length:
         movie_id = queue.pop()
