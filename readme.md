@@ -26,7 +26,7 @@ Author: Minchiuan(minchiuan.gao@gmail.com)
 2. 获得movie的评论;
 
     ```bash
-    $ python douban+movie_comment_spider.py
+    $ python douban_movie_comment_spider.py
     ```
 
 ### License:
