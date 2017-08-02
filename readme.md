@@ -19,11 +19,15 @@ Author: Minchiuan(minchiuan.gao@gmail.com)
 
 1. 获取movie-id：
 
+    ```bash
     $ python get_movie_id_bfs.py
+    ```
 
 2. 获得movie的评论;
 
+    ```bash
     $ python douban+movie_comment_spider.py
+    ```
 
 ### License:
 
