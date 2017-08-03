@@ -1,10 +1,10 @@
+#!/home/minquan/.conda/envs/ai-lab/bin/python
 import re
-from document_parser import get_soup
 import requests
-import time
-import random
-from fifo_q import Queue as Q
 import csv
+from fifo_q import Queue as Q
+from utils import random_sleep
+from document_parser import get_soup
 
 
 def get_movie_info(soup):
@@ -41,7 +41,8 @@ def extract_movie_info(f):
         url = get_subject_page_by_movie_id(movie_id)
         r = requests.get(url)
         if r.status_code == 200: return f(get_soup(r.text))
-        else: raise LookupError
+        elif r.status_code == 403: raise LookupError('error connection when getting: {}'.format(movie_id))
+        else: raise FileNotFoundError('movie: {} not found'.format(movie_id))
     return _extract
 
 
@@ -55,7 +56,7 @@ def add_ids_to_queue(queue, recommendations):
 
 
 def movie_info_saver(info_file):
-    csvfile = open(info_file, 'w', newline='')
+    csvfile = open(info_file, 'a+', newline='')
     spamwrite = csv.writer(csvfile)
     spamwrite.writerow(['id', 'douban_id', 'name', 'year', 'rating'])
 
@@ -80,7 +81,7 @@ def get_recommendation_by_bfs(movie_id):
 
     number = 0
 
-    save_info = movie_info_saver('movie_info.csv')
+    save_info = movie_info_saver('movie_info/movie_info_from_{}.csv'.format(movie_id[0]))
 
     while 0 < len(queue) < max_length:
         movie_id = queue.pop()
@@ -92,8 +93,13 @@ def get_recommendation_by_bfs(movie_id):
             recommendations = get_movie_recommendation(movie_id)
             save_info(number, movie_id)
         except LookupError as e:
-            print('error connection')
+            print(e)
             break
+        except FileNotFoundError as e:
+            print(e)
+            continue
+        except Exception as e:
+            continue
 
         queue = add_ids_to_queue(queue, recommendations)
 
@@ -101,8 +107,7 @@ def get_recommendation_by_bfs(movie_id):
 
         number += 1
 
-        random_sleep_time = random.randint(50, 100) / 100
-        time.sleep(random_sleep_time)
+        random_sleep()
 
     for ID in queue:
         try: save_info(number, ID)
@@ -118,6 +123,6 @@ if __name__ == '__main__':
     # print(movie_info)
     # print(recommends)
 
-    ids = ['26363254', '1849031', '26289138', '2567647']
+    ids = ['1441763']
 
     movies = get_recommendation_by_bfs(ids)
